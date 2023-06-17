@@ -1,7 +1,6 @@
 'use client'
 
 import * as React from 'react'
-import { signIn } from 'next-auth/react'
 
 import { cn } from '@/lib/utils'
 import { Button, type ButtonProps } from '@/components/ui/button'
@@ -13,8 +12,8 @@ interface LoginButtonProps extends ButtonProps {
 }
 
 export function LoginButton({
-  text = 'Login with GitHub',
-  showGithubIcon = true,
+  text = 'Login with Microsoft',
+  showGithubIcon = false,
   className,
   ...props
 }: LoginButtonProps) {
@@ -24,7 +23,6 @@ export function LoginButton({
       variant="outline"
       onClick={() => {
         setIsLoading(true)
-        signIn('github', { callbackUrl: `/` })
       }}
       disabled={isLoading}
       className={cn(className)}

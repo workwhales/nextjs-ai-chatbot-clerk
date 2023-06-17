@@ -2,7 +2,7 @@ import { kv } from '@vercel/kv'
 import { OpenAIStream, StreamingTextResponse } from 'ai'
 import { Configuration, OpenAIApi } from 'openai-edge'
 
-import { auth } from '@/auth'
+import { auth } from '@clerk/nextjs'
 import { nanoid } from '@/lib/utils'
 
 export const runtime = 'edge'
@@ -10,10 +10,10 @@ export const runtime = 'edge'
 export async function POST(req: Request) {
   const json = await req.json()
   const { messages, previewToken } = json
-  const session = await auth()
+  const session = auth()
 
   if (process.env.VERCEL_ENV !== 'preview') {
-    if (session == null) {
+    if (session.userId == null) {
       return new Response('Unauthorized', { status: 401 })
     }
   }
@@ -34,7 +34,7 @@ export async function POST(req: Request) {
   const stream = OpenAIStream(res, {
     async onCompletion(completion) {
       const title = json.messages[0].content.substring(0, 100)
-      const userId = session?.user.id
+      const userId = session.userId
       if (userId) {
         const id = json.id ?? nanoid()
         const createdAt = Date.now()
