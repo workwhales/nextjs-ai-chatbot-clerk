@@ -2,7 +2,7 @@ import * as React from 'react'
 import Link from 'next/link'
 
 import { cn } from '@/lib/utils'
-import { auth, currentUser } from '@clerk/nextjs'
+import { auth } from '@clerk/nextjs'
 import { clearChats } from '@/app/actions'
 import { buttonVariants } from '@/components/ui/button'
 import { Sidebar } from '@/components/sidebar'
@@ -16,7 +16,6 @@ import {
 import { SidebarFooter } from '@/components/sidebar-footer'
 import { ThemeToggle } from '@/components/theme-toggle'
 import { ClearHistory } from '@/components/clear-history'
-import { LoginButton } from '@/components/login-button'
 import { SignInButton, UserButton } from '@clerk/nextjs'
 
 export async function Header() {
