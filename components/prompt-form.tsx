@@ -43,7 +43,7 @@ export function PromptForm({
           return
         }
         if (isLoading) {
-          toast('Please wait for the previous message to send.')
+          toast('Please wait for the response to finish.')
           return
         }
         setInput('')
