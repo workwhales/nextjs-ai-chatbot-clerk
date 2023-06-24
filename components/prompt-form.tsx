@@ -12,6 +12,7 @@ import {
   TooltipTrigger
 } from '@/components/ui/tooltip'
 import { IconArrowElbow, IconPlus } from '@/components/ui/icons'
+import { toast } from 'react-hot-toast'
 
 export interface PromptProps
   extends Pick<UseChatHelpers, 'input' | 'setInput'> {
@@ -39,6 +40,10 @@ export function PromptForm({
       onSubmit={async e => {
         e.preventDefault()
         if (input === '') {
+          return
+        }
+        if (isLoading) {
+          toast('Please wait for the response to finish.')
           return
         }
         setInput('')
